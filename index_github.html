@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>اختبار تفاعلي</title>
+  <style>
+    body { font-family: Tahoma, sans-serif; background: #f8f9fa; margin: 20px; }
+    .quiz-container { max-width: 700px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; }
+    .question { font-size: 20px; margin-bottom: 15px; font-weight: bold; }
+    .option { display: block; margin: 8px 0; padding: 10px; background: #eee; border-radius: 5px; cursor: pointer; }
+    .option.correct { background: #c8e6c9; }
+    .option.wrong { background: #ffcdd2; }
+    #next-btn { margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer; display: none; }
+    #result { font-size: 22px; font-weight: bold; text-align: center; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="quiz">
+      <div id="question" class="question"></div>
+      <div id="options"></div>
+      <button id="next-btn">التالي</button>
+      <div id="result"></div>
+    </div>
+  </div>
+
+  <script>
+    const quizData = [
+      {q: "حدود الحرم داخل مكة، والمقيم فيه للإحرام بالحج من أين يحرم؟", options: ["من بيته", "من أدنى الحل", "من بيته للعمرة", "من أدنى الحل للعمرة"], correct: 1},
+      {q: "امرأة توفرت فيها الشروط الكاملة فزوجها والدها، من أولى الأولياء؟", options: ["الجد لأب", "الأخ الشقيق", "العم", "الوصي"], correct: 0},
+      {q: "رجل صاد حمامة بعصا ونسي التسمية، فما حكم أكلها؟", options: ["جائز لأنه نسيان", "غير جائز لأنه لم يذكر اسم الله", "غير جائز لأنها ماتت بالعصا", "جائز لأنها من الصيد المباح"], correct: 0},
+      {q: "حكم الطلاق؟", options: ["محرم", "مكروه", "مباح", "حسب الحالة"], correct: 3},
+      {q: "التفسير بالمأثور يكون:", options: ["بالقرآن والسنة والآثار", "بلغة العرب والقرآن", "بلغة العرب وآثار القرآن", "بلغة العرب والقرآن والسنة"], correct: 0},
+      {q: "حروف الهمس مجموعة في:", options: ["فحثه شخص سكت", "خص ضغط قظ", "أجدك تطبق", "يفترون"], correct: 0},
+      {q: "في عهد أي خليفة ظهر علم إعراب القرآن الكريم؟", options: ["عمر بن الخطاب", "علي بن أبي طالب", "عثمان بن عفان", "أبو سفيان بن معاوية"], correct: 1},
+      {q: "أراد معلم العلوم الشرعية استخدام خرائط المفاهيم، فأي الموضوعات أنسب؟", options: ["القصاص في النفس", "تطبيق صلاة الخوف", "قسمة مال الفرائض", "تطبيق التيمم"], correct: 0},
+      {q: "بيع النجش يندرج تحت:", options: ["التدليس", "الغبن", "الشرط", "المجلس"], correct: 0},
+      {q: "الفرقة التي قدمت العقل على النص:", options: ["الرافضة", "الخوارج", "المعتزلة", "الصوفية"], correct: 2},
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+    const nextBtn = document.getElementById("next-btn");
+    const resultEl = document.getElementById("result");
+
+    function loadQuestion() {
+      questionEl.textContent = quizData[currentQ].q;
+      optionsEl.innerHTML = "";
+      quizData[currentQ].options.forEach((opt, i) => {
+        const btn = document.createElement("div");
+        btn.textContent = opt;
+        btn.classList.add("option");
+        btn.addEventListener("click", () => selectAnswer(i, btn));
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function selectAnswer(selected, btn) {
+      const correct = quizData[currentQ].correct;
+      Array.from(optionsEl.children).forEach((option, i) => {
+        option.classList.add(i === correct ? "correct" : "");
+        if (i === selected && i !== correct) {
+          option.classList.add("wrong");
+        }
+        option.style.pointerEvents = "none";
+      });
+      if (selected === correct) score++;
+      nextBtn.style.display = "block";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      currentQ++;
+      if (currentQ < quizData.length) {
+        loadQuestion();
+        nextBtn.style.display = "none";
+      } else {
+        showResult();
+      }
+    });
+
+    function showResult() {
+      quiz.innerHTML = `<div id="result">انتهى الاختبار ✅<br> نتيجتك: ${score} من ${quizData.length}</div>`;
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>
