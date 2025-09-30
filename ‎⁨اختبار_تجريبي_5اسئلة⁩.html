@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>اختبار تجريبي - التفسير</title>
+<style>
+body { font-family: Tahoma; direction: rtl; margin: 20px; }
+.question { border: 1px solid #aaa; padding: 15px; margin-bottom: 20px; border-radius: 6px; }
+.result { font-weight: bold; margin-top: 10px; }
+.correct { color: green; display:none; }
+.wrong { color: red; display:none; }
+</style>
+<script>
+function checkAnswer(qNum, correctAnswer) {
+  var options = document.getElementsByName("q"+qNum);
+  var selected = "";
+  for(var i=0; i<options.length; i++){
+    if(options[i].checked){
+      selected = options[i].value;
+    }
+  }
+  if(selected === correctAnswer){
+    document.getElementById("correct"+qNum).style.display = "block";
+    document.getElementById("wrong"+qNum).style.display = "none";
+  } else if(selected !== ""){
+    document.getElementById("wrong"+qNum).style.display = "block";
+    document.getElementById("correct"+qNum).style.display = "none";
+  }
+}
+</script>
+</head>
+<body>
+
+<h2>📘 اختبار تجريبي (الجزء الأول)</h2>
+
+<div class="question">
+  <p><b>س1:</b> من المؤلفين المعاصرين في علوم القرآن:</p>
+  <label><input type="radio" name="q1" value="أ"> أ- الحوفي</label><br>
+  <label><input type="radio" name="q1" value="ب"> ب- الزركشي</label><br>
+  <label><input type="radio" name="q1" value="ج"> ج- السيوطي</label><br>
+  <label><input type="radio" name="q1" value="د"> د- محمد الزرقاوي</label><br>
+  <button onclick="checkAnswer(1, 'د')">تحقق</button>
+  <p id="correct1" class="result correct">✅ إجابة صحيحة</p>
+  <p id="wrong1" class="result wrong">❌ إجابة خاطئة</p>
+</div>
+
+<div class="question">
+  <p><b>س2:</b> ما استنبطه العلماء هو:</p>
+  <label><input type="radio" name="q2" value="أ"> أ- المطلق</label><br>
+  <label><input type="radio" name="q2" value="ب"> ب- المقيد</label><br>
+  <label><input type="radio" name="q2" value="ج"> ج- التفسير</label><br>
+  <label><input type="radio" name="q2" value="د"> د- التأويل</label><br>
+  <button onclick="checkAnswer(2, 'د')">تحقق</button>
+  <p id="correct2" class="result correct">✅ إجابة صحيحة</p>
+  <p id="wrong2" class="result wrong">❌ إجابة خاطئة</p>
+</div>
+
+<div class="question">
+  <p><b>س3:</b> علم يُفهم به كتاب الله تعالى، وبيان معانيه واستخراج أحكامه:</p>
+  <label><input type="radio" name="q3" value="أ"> أ- القراءات</label><br>
+  <label><input type="radio" name="q3" value="ب"> ب- علوم القرآن</label><br>
+  <label><input type="radio" name="q3" value="ج"> ج- الوحي</label><br>
+  <label><input type="radio" name="q3" value="د"> د- التفسير</label><br>
+  <button onclick="checkAnswer(3, 'د')">تحقق</button>
+  <p id="correct3" class="result correct">✅ إجابة صحيحة</p>
+  <p id="wrong3" class="result wrong">❌ إجابة خاطئة</p>
+</div>
+
+<div class="question">
+  <p><b>س4:</b> معالم التنزيل من كتب التفسير بالمأثور ألّفه:</p>
+  <label><input type="radio" name="q4" value="أ"> أ- ابن جرير الطبري</label><br>
+  <label><input type="radio" name="q4" value="ب"> ب- عبد الرحمن السعدي</label><br>
+  <label><input type="radio" name="q4" value="ج"> ج- البغوي</label><br>
+  <label><input type="radio" name="q4" value="د"> د- ابن كثير</label><br>
+  <button onclick="checkAnswer(4, 'ج')">تحقق</button>
+  <p id="correct4" class="result correct">✅ إجابة صحيحة</p>
+  <p id="wrong4" class="result wrong">❌ إجابة خاطئة</p>
+</div>
+
+<div class="question">
+  <p><b>س5:</b> التفسير الذي يتوقف المفسر عمّا لا فائدة في معرفته هو:</p>
+  <label><input type="radio" name="q5" value="أ"> أ- بالإجتهاد</label><br>
+  <label><input type="radio" name="q5" value="ب"> ب- بالرأي</label><br>
+  <label><input type="radio" name="q5" value="ج"> ج- باللغوي</label><br>
+  <label><input type="radio" name="q5" value="د"> د- بالمأثور</label><br>
+  <button onclick="checkAnswer(5, 'د')">تحقق</button>
+  <p id="correct5" class="result correct">✅ إجابة صحيحة</p>
+  <p id="wrong5" class="result wrong">❌ إجابة خاطئة</p>
+</div>
+
+</body>
+</html>
